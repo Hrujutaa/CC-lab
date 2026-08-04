@@ -1,1 +1,21 @@
+%{
+#include<stdio.h>
+int count=0;
+%}
 
+%%
+[aA].*  { count++;}
+
+.|\n {ECHO;}
+%%
+
+int main(){
+	printf("Enter a paragraph: ");
+	yylex();
+	printf("The number of words starting with a/A is: %d\n",count);
+	return 0;
+	}
+	
+int yywrap(){
+	return 1;
+	}
