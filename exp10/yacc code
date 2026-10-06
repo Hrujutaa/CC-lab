@@ -1,0 +1,34 @@
+%{
+#include <stdio.h>
+int yyerror(char *s);
+int yylex(void);
+%}
+
+%token FOR NUM ID INC DEC
+%token SE GE EQ
+
+%%
+input: F	{printf("valid loop");}
+		
+F: FOR '('expr1';'expr2';'expr3')'
+expr1: ID '=' NUM
+expr2: ID '>' NUM
+	|ID '<' NUM
+	|ID SE NUM
+	|ID GE NUM
+	|ID EQ NUM
+expr3: ID INC|ID DEC
+
+%%
+int yyerror(char *s)
+{
+    printf("Invalid loop");
+    return 0;
+}
+
+int main()
+{
+    printf("Enter: ");
+    yyparse();
+    return 0;
+}
