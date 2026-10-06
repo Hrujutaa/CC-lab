@@ -1,0 +1,28 @@
+%{
+#include "y.tab.h"
+#include <stdio.h>
+%}
+
+%%
+"for" {return FOR;}
+"++" {return INC;}
+"--" {return DEC;}
+">" {return '>';}
+"<" {return '<';}
+"<=" {return GE;}
+">=" {return SE;}
+"==" {return EQ;}
+"(" {return '(';}
+")" {return ')';}
+"=" {return '=';}
+";" {return ';';}
+"}" {return '}';}
+"{" {return '{';}
+[a-zA-Z][a-zA-Z0-9]* {return ID;}
+[0-9]+ {return NUM;}
+. {return yytext[0];}
+%%
+int yywrap()
+{
+    return 1;
+}
